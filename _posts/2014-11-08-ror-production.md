@@ -14,7 +14,7 @@ After hard days of development and tests I decided that my [sTracker](http://str
 
 Rails
 -----
-Suppose, we have latest sources on ubuntu server in /opt/projects/stracker folder. We need to figure out if everything work well. We have the working application on our system, but it may not work on a new environment. The best way to check what is broken is to conduct tests.
+Suppose, we have latest sources on ubuntu server in `/opt/projects/stracker` folder. We need to figure out if everything work well. We have the working application on our system, but it may not work on a new environment. The best way to check what is broken is to conduct tests.
 
 ```bash
 cd stracker
@@ -28,13 +28,19 @@ As expected, since the system is virgin, there is nothing except standard packag
 ```bash
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+
 ```
 
 Now it’s time to restart my shell so that PATH changes take effect. Usually I do just like this:
 
 ```bash
 bash
+```
+Or you can just run without restarting current shell
+
+```bash
+source ~/.bashrc
 ```
 
 Check if everything is ok:
@@ -167,6 +173,7 @@ It’s turn for site configuration. Go to `/etc/apache2/sites-available`, create
 ```
 
 Enable site:
+
 ```bash
 sudo a2ensite st.conf
 sudo service apache2 restart
