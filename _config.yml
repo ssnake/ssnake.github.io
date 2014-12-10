@@ -8,6 +8,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://snakelab.cc" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
 github_username:  ssnake
+facebook: max.nedelchev
 
 # Build settings
 markdown: redcarpet
