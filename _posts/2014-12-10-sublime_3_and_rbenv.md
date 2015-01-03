@@ -39,4 +39,13 @@ which ruby
 
 Save file with name like `my_ruby.sublime-build`. `my_ruby` name will appear among build system names. Enjoy!
 
+###Update
+if you observe .fuse_hidden* files at sidebar and it annoys you you can easily hide them. Open `Settings-user` file and this string:
+
+```json
+{
+	"file_exclude_patterns": [".fuse_hidde*"]
+}
+```
+
 

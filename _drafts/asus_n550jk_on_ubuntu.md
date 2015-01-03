@@ -35,6 +35,9 @@ sudo dkms install -m psmouse -v elantech-v7
 reboot
 ```
 
+https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1383097?comments=all
+
+http://mariusmonton.com/?p=489
 
 ### 3. Subwoofer works incorrectly
 
@@ -55,6 +58,18 @@ xrandr --output eDP1 --gamma 0.68:0.7:0.7
 
 ### 6. Card Reader doesn;t work
 
-### 7 No usb devices in VirtualBox guest machine
+### 7. No usb devices in VirtualBox guest machine
 
-https://www.virtualbox.org/ticket/8873
+There is no solution so far. Look at https://www.virtualbox.org/ticket/8873
+
+### 8. Power Management
+
+ASUS N550JK has discrete graphic card GeForce GTX 850M, also on board it has integrated card Intel HD Graphics 4600. By default Ubuntu 14.04 doesn't switch between cards correctly in order to reduce power consumption. 
+
+### Fix
+
+Luckuly there is a package [Bumblebee](https://wiki.ubuntu.com/Bumblebee). After installation you should notice longer battery life.
+
+```console
+sudo apt-get install bumblebee
+```
