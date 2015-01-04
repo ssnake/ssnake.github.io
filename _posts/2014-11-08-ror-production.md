@@ -10,7 +10,7 @@ First of all I must admit that this is my first deployment. Please, take into ac
 
 This post might be useful for those who want to deploy a rails app on its own server instead of pushing it to heroku, for example. 
 
-After hard days of development and tests I decided that my [sTracker](http://stracker.snakelab.cc) application is ready to be presented to the world. At this point I have the application which is working well in development mode. 
+After hard days of development and tests I decided that my [sTracker](http://stracker.cc) application is ready to be presented to the world. At this point I have the application which is working well in development mode. 
 
 Rails
 -----
