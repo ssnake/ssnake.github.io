@@ -130,7 +130,7 @@ wget http://onionwrt.link/download/openwrt-ramips-mt7620n-wt3020-4M-squashfs-sys
 ```console
 mkdir -p /tmp/tftp/
 cp openwrt*.bin /tmp/tftp/code.bin
-sudo chmod a-rwx -R /tmp/tftp/
+sudo chmod a+rwx -R /tmp/tftp/
 sudo ip addr add 10.10.10.3/24 dev eth0
 sudo dnsmasq -d --port=0 --enable-tftp --tftp-root=/tmp/tftp/
 ```
