@@ -16,16 +16,16 @@ Rails
 -----
 Suppose, we have latest sources on ubuntu server in `/opt/projects/stracker` folder. We need to figure out if everything work well. We have the working application on our system, but it may not work on a new environment. The best way to check what is broken is to conduct tests.
 
-```bash
+```console
 cd stracker
 snake@userv:/opt/projects/stracker$ rake tests
 The program 'rake' is currently not installed. You can install it by typing:
 sudo apt-get install rake
 ```
 
-As expected, since the system is virgin, there is nothing except standard packages. We have to install ruby. As RoR site suggests the best practice is using rbenv. Here is the tutorial how to install rbenv (https://github.com/sstephenson/rbenv#installation). My steps are:
+As expected, since the system is virgin, there is nothing except standard packages. We have to install ruby. As RoR site suggests the best practice is using rbenv. Here is the tutorial how to install [rbenv](https://github.com/sstephenson/rbenv#installation). My steps are:
 
-```bash
+```console
 git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
@@ -34,18 +34,18 @@ echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
 Now it’s time to restart my shell so that PATH changes take effect. Usually I do just like this:
 
-```bash
+```console
 bash
 ```
 Or you can just run without restarting current shell
 
-```bash
+```console
 source ~/.bashrc
 ```
 
 Check if everything is ok:
 
-```bash
+```console
 snake@userv:/opt/projects/stracker$ type rbenv
 rbenv is a function
 ...
@@ -53,21 +53,21 @@ rbenv is a function
 
 Now we have installed rbenv. I recommend to install two plugins which will make our life easier. We need ruby-build and rbenv-sudo plugins:
 
-```bash
+```console
 git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build  
 git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
 ```
 
 Now it’s time for ruby itself. We will install ruby 2.1.0, during the process of installation ruby may need some developing packages. Here is list which may help you:
 
-```bash
+```console
 sudo apt-get install gcc g++ make libssl-dev sqlite3 libsqlite3-dev
 rbenv install 2.1.0
 ```
 
 And set 2.1.0 as global version and install bundle and rails:
 
-```bash
+```console
 rbenv global 2.1.0
 gem install bundle
 gem install rails
@@ -77,18 +77,18 @@ After installing some gems you may see that they don’t work from command line.
 
 Now make sure we are in our application folder. We will install all gems are necessary for the app:
 
-```bash
+```console
 bundle install
 ```
 
 Now test it if all is up and ok:
 
-```bash
+```console
 rake test
 ```
 Hope everything is ok.
 
-```bash
+```console
 rake db:setup
 rails server
 ```
@@ -102,14 +102,14 @@ Setting up the application to run in production mode is pretty challenging. The 
 
 First of all, we need to install Passenger gem. 	
 
-```bash
+```console
 gem install passenger
 ```
 
 After restarting shell, you should see passenger’s help tool like `passenger-install-apache2-module` .
 Start it and it will guide you via a process of an integration passenger into apache.
 
-```bash
+```console
 passenger-install-apache2-module
 ```
 
@@ -117,7 +117,7 @@ During this process you may face “Your system does not have a lot of virtual m
 
 At the end of successful compilation process you should get:
 
-```bash
+```console
    LoadModule passenger_module /home/snake/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/passenger-4.0.52/buildout/apache2/mod_passenger.so
    <IfModule mod_passenger.c>
      PassengerRoot /home/snake/.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/passenger-4.0.52
@@ -128,7 +128,7 @@ Add these lines into  your Apache configuration file. Go to `/etc/apache2/mods-a
 Add `LoadModule passenger_module ...mod_passenger.so` string into `passenger.load` and add remaining text `<IfModule mod_passenger.c>...  </IfModule>` into `passenger.conf`.
 Now we will enable passenger module:
 
-```bash
+```console
 sudo a2enmod passenger
 sudo service apache2 restart
 ````
@@ -137,7 +137,7 @@ Make sure there are no errors.
 
 Let's config vhost. Suppose you have a web application in `/somewhere`. Add a virtual host to your Apache configuration file and set its `DocumentRoot` to `/somewhere/public`:
 
-```bash
+```console
    <VirtualHost *:80>
       ServerName www.yourhost.com
       # !!! Be sure to point DocumentRoot to 'public'!
@@ -155,7 +155,7 @@ Let's config vhost. Suppose you have a web application in `/somewhere`. Add a vi
 
 It’s turn for site configuration. Go to `/etc/apache2/sites-available`, create `st.conf`, for example, and add following text:
 
-```bash
+```console
 <VirtualHost *:80>
       #userv is hostname of my virtualbox pc
       ServerName userv
@@ -174,7 +174,7 @@ It’s turn for site configuration. Go to `/etc/apache2/sites-available`, create
 
 Enable site:
 
-```bash
+```console
 sudo a2ensite st.conf
 sudo service apache2 restart
 ```
@@ -182,7 +182,7 @@ Now check if site is up, input `userv` (hostname of our virtualbox pc) into your
 
 Look at `/var/log/apache2/error.log`:
 
-```bash
+```console
 [ 2014-10-03 11:15:05.2952 4807/7fb4b79e5780 agents/Watchdog/Main.cpp:728 ]: All Phusion Passenger agents started!
 App 4888 stdout:
 App 4888 stderr: /usr/bin/env:
@@ -198,7 +198,7 @@ Refresh your browser and check if our app is working.
 
 Mine doesn’t work. I faced missing `secret_key_base` issue:
 
-```bash
+```console
 App 4888 stderr: [ 2014-10-03 11:15:15.5546 4919/0x007f2746d71008(Worker 1) utils.rb:84 ]: *** Exception RuntimeError in Rack application objec
 t (Missing `secret_key_base` for 'production' environment, set this value in `config/secrets.yml`) (process 4919, thread 0x007f2746d71008(Worke
 r 1)):
@@ -219,7 +219,7 @@ All we need is to add secret key into environmental value `SECRET_KEY_BASE`. I f
 
 All wide-system variables could be added into `/etc/profile.d`. To generate secret key we need be inside our app folder and launch `rake secret` command. Then generated key should be added into .sh script in `profile.d` folder. To do it in one command line string input following:
 
-```bash
+```console
 echo "export SECRET_KEY_BASE=`rake secret`" | sudo tee /etc/profile.d/st_env.sh 
 ```
 
@@ -240,7 +240,7 @@ Ok, at this point we have `SECKET_KEY_BASE` added. Refresh your browser. You sho
 
 Unfortunately I faced two problems. First, I forgot to setup my DB and second CSS styles is not working:
 
-```bash
+```console
 RAILS_ENV="production" rake db:setup
 RAILS_ENV=”production” rake assets:precompile
 ```
