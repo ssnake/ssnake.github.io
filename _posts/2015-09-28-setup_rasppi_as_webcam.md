@@ -5,25 +5,25 @@ comments: true
 tag: rasp, camera
 ---
 
-I'm owner of 256mb version Raspberry PI. Recently I've bought a [camera module](http://www.raspberrypi.org/camera-board-available-for-sale/). Here is my tutorial how to make web camera. 
+I'm owner of 256mb version Raspberry PI. Recently I've bought a [camera module](http://www.raspberrypi.org/camera-board-available-for-sale/). Here is my tutorial how to make a web camera. 
 
-The idea is simple. We will capture images every 5 seconds and will share them via web interface. For capturing we will use `raspistill` console utility which is provided with RASPBIAN as out-of-box. 
+The idea is simple. We will capture images every 5 seconds and will share them via a web interface. For capturing we will use the `raspistill` console utility which is provided with RASPBIAN as out-of-box. 
 
 ### Setup RAM drive for storing captured images
-Since any SD card has limit resources for writing cycles we will use ram drive as temporary storage drive. Let's create ram drive. First make folder for it:
+Since any SD card has limit resources for writing cycles we will use ram drive as temporary storage drive. Let's create a ram drive. First make a folder for it:
 
 ```console
 sudo mkdir /var/tmp/ram_drive
 
 ```
 
-Add following string to fstab to make sure ram drive is created on every system boot
+Add following string to fstab to make sure a ram drive is created on an every system boot
 
 ```console
 tmpfs /var/tmp/ram_drive tmpfs nodev,nosuid,size=10M 0 0 
 ```
 
-Now mount it to system:
+Now mount it to a system:
 
 ```console
 sudo mount -a
@@ -37,7 +37,7 @@ df -h
 
 ### Create bash script to capture images
 
-We will create a script which will be launched by cron daemon every minute. 1 minute is not enough we need refresh image every 5 secs. The solution is run `raspistill` 12 times as one cron task (60/12 = 5 sec). Furthermore this script will work with 2 image files. One image for publishing it via web daemon, another is kind of "double buffer" file. Also timestamp will be added to images.
+We will create a script which will be launched by the cron daemon every minute. 1 minute is not enough we need refresh image every 5 secs. The solution is run `raspistill` 12 times as one cron task (60/12 = 5 sec). Furthermore this script will work with 2 image files. One image for publishing it via web daemon, another is kind of "double buffer" file. Also timestamp will be added to images.
 Install `imagemagick` which is responsable for this work.
 
 ```console
@@ -101,7 +101,7 @@ Now install and config Monkey:
 sudo apt-get update &&  sudo apt-get install monkey
 ```
 
-After installation monkey daemon should be up. Open browser and type `<your pi address>:2001` you should see default monkey welcome page. The default place for web site is in `/usr/share/monkey`. Go there and remove everything. Now make sym link to ram drive image.
+After installation the monkey daemon should be up. Open browser and type `<your pi address>:2001` you should see default monkey welcome page. The default place for web site is in `/usr/share/monkey`. Go there and remove everything. Now make sym link to ram drive image.
 
 ```console
 cd /usr/share/monkey
@@ -159,3 +159,8 @@ window.onload = function() {
 }
 
 ```
+Check `<your pi address>:2001` you should see updatable pictures from pi.
+
+### Conclusion
+
+This is not a best solution for "streaming" pi's pictures online. I came across better solutions on internet.  However, this article has helpful tricks I may need in future.
