@@ -14,3 +14,5 @@ facebook: max.nedelchev
 markdown: redcarpet
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace",
  "test", "CNAME", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
+sass:
+  sass_dir: _scss
