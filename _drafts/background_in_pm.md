@@ -3,12 +3,25 @@ layout: post
 title: Background processes in production mode
 comments: true
 ---
-Background processes in production mode
-My app is using background processes. One is clock process and another is delay_job process. I’m using foreman gem to put things together. Here is my solution how to run it in production mode.
+
+Intro
+========
+
+Working on [sTracker](//stracker.cc) I got to a situation when I needed to run background processes. In particular It was necessary to check tracking numbers time to time. The checking included querying post services and saving received information to DB.
+As may you know the trendy solution is to use [DelayedJob gem](https://github.com/collectiveidea/delayed_job) and that's what I made and it's have been working perfectly. So I won't be original to tell you about my steps in order to get DJ working.
+
+DJ
+==
+## Foreman
+
+So, DJ needs to be started. It can't start itself. For these purposes I used for
+ is using background processes. One is clock process and another is delay_job process. I’m using foreman gem to put things together. Here is my solution how to run it in production mode.
 My Proc file looks like this:
+```
 snake@userv:/opt/projects/stracker$ cat Procfile 
 worker:	bundle exec rake jobs:work
 clock:		bundle exec clockwork lib/clock.rb
+```
 
 Make sure foreman is installed on your server. And you have rbenv-sudo installed if not then launch 
 git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
@@ -53,9 +66,62 @@ where start is alias for initctl start(upstart utility). There are other console
 Check logs in /var/log/upstart/stracker-*.log files.
 
 
+ThreadsPad
+==========
+
+Alas, DJ is not always a good solution. For instance, working on another commercial application I had to import and parse a xls file. Since the file had huge amount of data the parsing took time. To overcome this time-consuming process I had to split a parsing thread on a few ones. For this purpose I wrote a gem that allows to solve this task. [ThreadsPad](https://github.com/ssnake/threads_pad) allows to run a task in a few parallel threads. Once you started them you will get id of threads suite with this id you can control them and see logs. 
 
 
+### Installation
+
+Add the gem to yout Gemfile:
+
+```
+gem "threads_pad", github: "ssnake/threads_pad"
+````
+
+ThreadsPad uses two tables: `threads_pad_jobs` and `threads_pad_job_logs`. Lately I will tell about them, but now just run `rails generate` to add these tables:
+
+```
+rails generate threads_pad init
+```
+
+### Usage
+
+ ThreadsPad works with classes descended from ThreadsPad::Job class. This class has a virtual `work` method that will do all work in thread.
+ 
+ For example, we have a task to calculate a sum. We will launch 3 threads
 
 
+```ruby
+class CalcWork < ThreadsPad::Job
+	def initialize start, count
+		@start = start
+		@count = count
+	end
 
+	def work 
+		sum= @start
+		self.max = @count
+		@count.times do 
+			sum += 1
+			self.current+=1
+			debug "current #{self.current}"
+			if terminated?
+				debug 'terminated'
+				break
+			end
+		end
+		return sum
+	end
+end
+```
+
+`ThreadsPad::Job` has following attributes and methods you can control:
+
+* min - minimal value of progress
+* max - maximal value of progress
+* current - current value of progress, between min and max
+* terminated? - check whether job is terminated or not
+* debug(msg) - log msg
 
