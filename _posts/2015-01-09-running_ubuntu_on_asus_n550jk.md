@@ -25,7 +25,7 @@ Run `updae-grub` and reboot.
 
 This might help:
 
-```console 
+{% highlight console  %}
 sudo modprobe -r psmouse
 cd /usr/src/
 sudo dkms remove psmouse/elantech-v6 --all
@@ -35,7 +35,7 @@ sudo dkms add -m psmouse -v elantech-v7
 sudo dkms build -m psmouse -v elantech-v7 
 sudo dkms install -m psmouse -v elantech-v7
 reboot
-```
+{% endhighlight %}
 Links connected with subject:
 
 [Link 1](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1383097?comments=all)
@@ -48,9 +48,9 @@ Fix:
 
 Added following line into `/etc/modprobe.d/alsa-base.conf`:
 
-```console
+{% highlight console %}
 	options snd-hda-intel model=asus-mode4
-```
+{% endhighlight %}
 Reboot. If you run sound test via sound settings menu you should hear sound from front left, front right and rear right. Rear right should be sounded via subwoofer. Rear left should be without sound. Despite that if you start using music, left and right speakers will work together with subwooder. To check this 
 `speaker-test -c6 -twav`
 
@@ -60,9 +60,9 @@ No solution so far
 
 ### 5. screen calibration
 
-```console
+{% highlight console %}
 xrandr --output eDP1 --gamma 0.68:0.7:0.7
-```
+{% endhighlight %}
 
 ### 6. Card Reader works unstably
 
@@ -78,6 +78,6 @@ ASUS N550JK has discrete graphic card GeForce GTX 850M, also on board it has int
 
 Luckuly there is a package [Bumblebee](https://wiki.ubuntu.com/Bumblebee). After installation you should notice longer battery life.
 
-```console
+{% highlight console %}
 sudo apt-get install bumblebee
-```
+{% endhighlight %}

@@ -40,33 +40,33 @@ Answer all questions as you wish, but when it asks `Common Name (e.g. server FQD
 
 I'm using for my apps apache as a web server. Here are steps to setup it to use SSL. First of all we need to disable a key password. 
 
-```
+{% endhighlight %}
 openssl rsa -in fd.key -out fd_np.key
 mv fd.key fd.key.org
 mv fd_np.key fd.key
 
-```
+{% endhighlight %}
 
 Check if we get rid of a password: `openssl rsa -text -in fd.key`.
 
 Now copy `fd.key` and `fd.crt` to Ubuntu Trust Store
 
 
-```
+{% endhighlight %}
 sudo cp fd.crt /etc/ssl/certs/
 sudo cp fd.key /etc/ssl/private/
 sudo chmod 0600 /etc/ssl/private/fd.key
-```
+{% endhighlight %}
 
 For using SSL apache has a module for this. Let's enable it:
 
-```
+{% endhighlight %}
 sudo a2enmod ssl
-```
+{% endhighlight %}
 
 Now we have to re-write our <site>.conf in `/etc/apache2/sites-enabled`
 
-```
+{% endhighlight %}
    # change default port to 443
    <VirtualHost *:443>                                                                                                                          
       ServerName www.myapp.com                                                                                                                                                                                                  

@@ -59,10 +59,10 @@ After openning of the router you need to solder 3 joints. 3 joins represent 3 TT
 
 You will need following packages:
 
-```console
+{% highlight console %}
 sudo apt-get install tftp minicom
 
-```
+{% endhighlight %}
 
 ### Connect to the router via serial port
 
@@ -70,9 +70,9 @@ Before connecting find out a port number of your ttl-usb converter, usually it i
 
 Start minicom and set up port connection.
 
-```console
+{% highlight console %}
 minicom -s
-```
+{% endhighlight %}
 
 Select `Serial port setup`. Then press `A`, input `/dev/ttyUSB0`. Press `E` set `57600 bps 8N1`. After all save it `Save setup as dfl`. 
 
@@ -81,7 +81,7 @@ Leave minicom running, do not pay attention to `offline` at status line below. D
 Ok, now it's turn for the router. Unplug the router. Connect the router to ttl-usb converter, then connect ttl-usb converter to PC, in a nutshell the router should be connecter to PC.
 Plug in WT32020, following data should appear on terminal window:
 
-```console
+{% highlight console %}
 ============================================ 
 Ralink UBoot Version: 4.1.0.0
 -------------------------------------------- 
@@ -105,7 +105,7 @@ Please choose the operation:
    4: Entr boot command line interface.
    7: Load Boot Loader code then write to Flash via Serial. 
    9: Load Boot Loader code then write to Flash via TFTP. 
-```
+{% endhighlight %}
 If you see data above then you have done everything correctly. 
 
 ### Flashing
@@ -121,19 +121,19 @@ If you see data above then you have done everything correctly.
 `code.bin`. The router should got into waiting mode. It's waiting fot tftp server. Let's bring up tftp online.
 * 7. Open another terminal tab and download openwrt firmware:
 
-```console
+{% highlight console %}
 wget http://onionwrt.link/download/openwrt-ramips-mt7620n-wt3020-4M-squashfs-sysupgrade.bin
 
-```
+{% endhighlight %}
 * 8. Create and bring up tftp server on PC.
 
-```console
+{% highlight console %}
 mkdir -p /tmp/tftp/
 cp openwrt*.bin /tmp/tftp/code.bin
 sudo chmod a+rwx -R /tmp/tftp/
 sudo ip addr add 10.10.10.3/24 dev eth0
 sudo dnsmasq -d --port=0 --enable-tftp --tftp-root=/tmp/tftp/
-```
+{% endhighlight %}
 * 9. THe flashing process should be started.
 
 After couple of minutes WT3020 will reboot into openwrt. Enjoy!. Thanks for reading.

@@ -17,11 +17,11 @@ DJ
 So, DJ needs to be started. It can't start itself. For these purposes I used for
  is using background processes. One is clock process and another is delay_job process. I’m using foreman gem to put things together. Here is my solution how to run it in production mode.
 My Proc file looks like this:
-```
+{% endhighlight %}
 snake@userv:/opt/projects/stracker$ cat Procfile 
 worker:	bundle exec rake jobs:work
 clock:		bundle exec clockwork lib/clock.rb
-```
+{% endhighlight %}
 
 Make sure foreman is installed on your server. And you have rbenv-sudo installed if not then launch 
 git clone git://github.com/dcarley/rbenv-sudo.git ~/.rbenv/plugins/rbenv-sudo
@@ -76,15 +76,15 @@ Alas, DJ is not always a good solution. For instance, working on another commerc
 
 Add the gem to yout Gemfile:
 
-```
+{% endhighlight %}
 gem "threads_pad", github: "ssnake/threads_pad"
-````
+{% highlight ` %}
 
 ThreadsPad uses two tables: `threads_pad_jobs` and `threads_pad_job_logs`. Lately I will tell about them, but now just run `rails generate` to add these tables:
 
-```
+{% endhighlight %}
 rails generate threads_pad init
-```
+{% endhighlight %}
 
 ### Usage
 
@@ -93,7 +93,7 @@ rails generate threads_pad init
  For example, we have a task to calculate a sum. We will launch 3 threads
 
 
-```ruby
+{% highlight ruby %}
 class CalcWork < ThreadsPad::Job
 	def initialize start, count
 		@start = start
@@ -115,7 +115,7 @@ class CalcWork < ThreadsPad::Job
 		return sum
 	end
 end
-```
+{% endhighlight %}
 
 `ThreadsPad::Job` has following attributes and methods you can control:
 

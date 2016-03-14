@@ -31,10 +31,10 @@ Here is link for working installer which doesn't have "entry point" bug.
 First of all, git clone the Rubyinstaller Dev kit.
 
 
-```console
+{% highlight console %}
 git clone git://github.com/oneclick/rubyinstaller.git
 cd rubyinstaller
-```
+{% endhighlight %}
 It's rake-based app. You can check its command by `rake -T`.
 
 
@@ -43,9 +43,9 @@ It's rake-based app. You can check its command by `rake -T`.
 Now we need to install dev kit
 
 
-```console
+{% highlight console %}
 rake devkit sfx=1 dkver=mingw-32-4.6.2
-```
+{% endhighlight %}
 Using mingw-32-4.6.2 allowed me to solve "segmentation fault".
 After compilation you will have something like `pkg\DevKit-mingw-32-4.6.2-20150211-0706.7z`
 Unpack it to `C:\DevKit`. Make sure `C:\DevKit\bin` and `C:\DevKit\mingw\bin` are in PATH.
@@ -55,10 +55,10 @@ Unpack it to `C:\DevKit`. Make sure `C:\DevKit\bin` and `C:\DevKit\mingw\bin` ar
 
 Now compile ruby
 
-```console
+{% highlight console %}
 rake clean
 rake ruby21
-```
+{% endhighlight %}
 If it's successfully compiled the `sandbox\ruby21_mingw` folder will have ruby. Copy them to `C:\Ruby21`.
 
 

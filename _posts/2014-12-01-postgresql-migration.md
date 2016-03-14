@@ -13,35 +13,35 @@ According to [official documentation](http://www.postgresql.org/docs/9.3/static/
 Let's log in to source server and find out place of data directory. On source server I have ubuntu distributive and installed PostgreSQL 9.3. Open `/etc/postgresql/9.3/main/postgresql.conf` and find line with `data_directory`. My line is `data_directory = '/var/lib/postgresql/9.3/main'`.  
 Backup it via following command:
 
-```bash
+{% highlight bash %}
 sudo tar -cf backup.tar /var/lib/postgresql
-```
+{% endhighlight %}
 Log in to destination server and install PostgreSQL.
 
-```bash
+{% highlight bash %}
 apt-get install postgresql-9.3 postgresql-server-dev-9.3
-```
+{% endhighlight %}
 You may see following message:
 
-```bash
+{% highlight bash %}
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
 E: Unable to locate package postgresql-9.3
 E: Couldn't find any package by regex 'postgresql-9.3'
-```
+{% endhighlight %}
 Turned out Ubuntu 13.10 (saucy) which is on my desination server doesn't have 9.3 version. We made backup of 9.3 DB, so we need to restore it in 9.3. Here is workarround:
 
 Create `pg.list` file in `/etc/apt/sources.list.d`. Add `deb http://apt.postgresql.org/pub/repos/apt/ saucy-pgdg main` line to it and make 
 
-```bash
+{% highlight bash %}
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install postgresql-9.3 postgresql-server-dev-9.3
-```
+{% endhighlight %}
 Now let's restore DB at new place. Make sure postgresql is stopped
 
-```bash
+{% highlight bash %}
 sudo tar -xf backup.tar -C /
-```
+{% endhighlight %}
 Start postgre service. Now you should have your fully restored DB. Enjoy!

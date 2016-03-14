@@ -19,34 +19,34 @@ sudo mkdir /var/tmp/ram_drive
 
 Add following string to fstab to make sure a ram drive is created on an every system boot
 
-```console
+{% highlight console %}
 tmpfs /var/tmp/ram_drive tmpfs nodev,nosuid,size=10M 0 0 
-```
+{% endhighlight %}
 
 Now mount it to a system:
 
-```console
+{% highlight console %}
 sudo mount -a
-```
+{% endhighlight %}
 
 Check if it's mounted:
 
-```console
+{% highlight console %}
 df -h
-```
+{% endhighlight %}
 
 ### Create bash script to capture images
 
 We will create a script which will be launched by the cron daemon every minute. 1 minute is not enough we need refresh image every 5 secs. The solution is run `raspistill` 12 times as one cron task (60/12 = 5 sec). Furthermore this script will work with 2 image files. One image for publishing it via web daemon, another is kind of "double buffer" file. Also timestamp will be added to images.
 Install `imagemagick` which is responsable for this work.
 
-```console
+{% highlight console %}
 sudo apt-get install imagemagick
-```
+{% endhighlight %}
 
 Open nano editor and copy/past the script:
 
-```bash
+{% highlight bash %}
 #!/bin/bash
 OUTPUT=/var/tmp/ram_drive
 OPTIONS='-vf -hf -w 800 -h 600 -q 80 -x'
@@ -79,7 +79,7 @@ do
 done
 
 
-```
+{% endhighlight %}
 
 Make it executable:
 
@@ -91,33 +91,33 @@ We will use web to have access to our camera. Since rasp pi is small device with
 
 Add source repo to `/etc/apt/sources.list` file:
 
-```console
+{% highlight console %}
 deb http://packages.monkey-project.com/primates_pi primates_pi main
-```
+{% endhighlight %}
 
 Now install and config Monkey:
 
-```console
+{% highlight console %}
 sudo apt-get update &&  sudo apt-get install monkey
-```
+{% endhighlight %}
 
 After installation the monkey daemon should be up. Open browser and type `<your pi address>:2001` you should see default monkey welcome page. The default place for web site is in `/usr/share/monkey`. Go there and remove everything. Now make sym link to ram drive image.
 
-```console
+{% highlight console %}
 cd /usr/share/monkey
 sudo ln -s /var/tmp/ram_drive/cam.jpg cam.jpg
-```
+{% endhighlight %}
 By default monkey doesn't support sym links you have to enable it. Open `/etc/monkey/monkey.conf` and enable sym links:
 
-```console
+{% highlight console %}
 
 SymLink On
-```
+{% endhighlight %}
 Restart daemon:
 
-```console
+{% highlight console %}
 sudo service monkey restart
-```
+{% endhighlight %}
 
 ### Web page
 
@@ -125,7 +125,7 @@ Let's create web page which will refresh image every 5 secs.
 
 index.html
 
-```html
+{% highlight html %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -137,20 +137,20 @@ index.html
   <img id="cam" class="cam" src="/cam.jpg">
   <body>
 </html>
-```
+{% endhighlight %}
 main.css
 
-```css
+{% highlight css %}
 .cam {
   height: 600px;
   width: 100%;
 }
 
-```
+{% endhighlight %}
 
 script.js
 
-```js
+{% highlight js %}
 window.onload = function() {
   setInterval(function() {
     var myImageElement = document.getElementById('cam');
@@ -158,7 +158,7 @@ window.onload = function() {
   }, 5000);
 }
 
-```
+{% endhighlight %}
 Check `<your pi address>:2001` you should see updatable pictures from pi.
 
 ### Conclusion

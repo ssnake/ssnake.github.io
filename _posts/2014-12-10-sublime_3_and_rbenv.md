@@ -14,14 +14,14 @@ Click `Tools | Build System | New Build System`.
 
 Copy following text:
 
-```console
+{% highlight console %}
 {
 	"cmd": ["/home/snake/.rbenv/shims/ruby",  "$file"],
  	"file_regex": "^(...*?):([0-9]*):?([0-9]*)",
     "selector": "source.ruby"
 }
 
-```
+{% endhighlight %}
 
 Here is description of values ([full doc](http://sublimetext.info/docs/en/reference/build_systems.html)):
 
@@ -33,19 +33,19 @@ Here is description of values ([full doc](http://sublimetext.info/docs/en/refere
 
 Replace `cmd` string with your correct path to ruby. To make it quicker run it in console:
 
-```console
+{% highlight console %}
 which ruby
-```
+{% endhighlight %}
 
 Save file with name like `my_ruby.sublime-build`. `my_ruby` name will appear among build system names. Enjoy!
 
 ###Update
 if you observe .fuse_hidden* files at sidebar and it annoys you you can easily hide them. Open `Settings-user` file and this string:
 
-```json
+{% highlight json %}
 {
 	"file_exclude_patterns": [".fuse_hidde*"]
 }
-```
+{% endhighlight %}
 
 
