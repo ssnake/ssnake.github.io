@@ -14,7 +14,7 @@ github_username:  ssnake
 facebook: max.nedelchev
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace",
  "test", "CNAME", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
 sass:

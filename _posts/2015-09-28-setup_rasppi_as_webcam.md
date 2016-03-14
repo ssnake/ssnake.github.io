@@ -12,10 +12,10 @@ The idea is simple. We will capture images every 5 seconds and will share them v
 ### Setup RAM drive for storing captured images
 Since any SD card has limit resources for writing cycles we will use ram drive as temporary storage drive. Let's create a ram drive. First make a folder for it:
 
-```console
+{% highlight console %} 
 sudo mkdir /var/tmp/ram_drive
 
-```
+{% endhighlight %}
 
 Add following string to fstab to make sure a ram drive is created on an every system boot
 
