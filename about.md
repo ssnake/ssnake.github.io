@@ -4,6 +4,5 @@ title: About
 permalink: /about/
 ---
 
-Welcome,
+I'm fond of morality, creativity, problem solving and lack of prejudice
 
-My name is Max. I'm software engineer and this site devoted to my work. 

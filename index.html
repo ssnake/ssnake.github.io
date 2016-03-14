@@ -1,21 +1,15 @@
 ---
 layout: default
+title: Home
+bodyclass: home
 ---
+{% include my_face.html%}
+<section class="posts txt-center container">
 
-<div class="home">
+  {% for post in paginator.posts %}
+    {% include article.html %}
+  {% endfor %}
 
-  <!-- <h1 class="page-heading">Posts</h1> -->
+  {% include pagination.html %}
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <h1>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h1>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-
-
-</div>
+</section>

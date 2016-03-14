@@ -41,7 +41,9 @@
   display: inline-block;
   font-weight: 700;
   line-height: 2.6em;
-  padding: 0 1.6em;
+  padding-left: 1.6em;
+  padding-right: 1.6em;
+  padding-top: 0.7em;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
@@ -97,7 +99,7 @@
 }
 
 .author-thumb {
-  opacity: .7;
+  //opacity: .7;
   display: inline-block;
   transition: opacity .2s ease;
 

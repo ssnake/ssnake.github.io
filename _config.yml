@@ -1,12 +1,15 @@
 # Site settings
 title: snakelab
 email: max.nedelchev@gmail.com
+paginate: 6
+paginate_path: "/page/:num"
 description: > # this means to ignore newlines until "baseurl:"
-  the place where my work lives
+  my two cents about a life
   
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://snakelab.cc" # the base hostname & protocol for your site
-#twitter_username: jekyllrb
+
+
 github_username:  ssnake
 facebook: max.nedelchev
 
@@ -16,3 +19,4 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
  "test", "CNAME", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
 sass:
   sass_dir: _scss
+gems: [jekyll-paginate]

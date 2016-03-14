@@ -9,6 +9,10 @@
     <main class="container">
 
         {% include header.html %}
+        {% if page.show_me %}
+          {% include my_face.html %}
+        {% endif %}
+
 
         <section class="main-content">
           {{ content }}
