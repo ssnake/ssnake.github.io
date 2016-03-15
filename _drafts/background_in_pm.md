@@ -17,7 +17,8 @@ DJ
 So, DJ needs to be started. It can't start itself. For these purposes I used for
  is using background processes. One is clock process and another is delay_job process. I’m using foreman gem to put things together. Here is my solution how to run it in production mode.
 My Proc file looks like this:
-{% endhighlight %}
+
+{% highlight console %}
 snake@userv:/opt/projects/stracker$ cat Procfile 
 worker:	bundle exec rake jobs:work
 clock:		bundle exec clockwork lib/clock.rb
@@ -76,13 +77,13 @@ Alas, DJ is not always a good solution. For instance, working on another commerc
 
 Add the gem to yout Gemfile:
 
-{% endhighlight %}
+{% highlight console %}
 gem "threads_pad", github: "ssnake/threads_pad"
-{% highlight ` %}
+{% endhighlight %}
 
 ThreadsPad uses two tables: `threads_pad_jobs` and `threads_pad_job_logs`. Lately I will tell about them, but now just run `rails generate` to add these tables:
 
-{% endhighlight %}
+{% highlight console %}
 rails generate threads_pad init
 {% endhighlight %}
 
