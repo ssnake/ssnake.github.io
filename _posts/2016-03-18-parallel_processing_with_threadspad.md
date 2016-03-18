@@ -119,7 +119,7 @@ Ok, we have launched threads in background, so how we can control them and get f
     })
 {% endhighlight %}
 
-##Behind The Curtains
+##Behind The Curtain
 
 Every *ThreadsPad::Job* encapsulates *ThreadsPad::JobReflection* ActiveRecord class. It represents by *threads_pad_jobs* table:
 
