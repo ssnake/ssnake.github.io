@@ -92,6 +92,7 @@ The *ThreadsPad::Pad* class has following methods:
 * \#destroy_all - remove from db all records that belongs to a current job. If a job is not finished yet, it will be marked as *destroy_on_finish*. Once it get finished it will destroy itself.
 * \# start - starts jobs added to pad. It returns id number for this bundle of jobs.
 
+<br>
 
 ## Getting a Status
 
