@@ -28,7 +28,6 @@ rails generate threads_pad i
 rake db:migrate
 {% endhighlight %}
 
-<br>
 
 ## Usage
 
@@ -71,6 +70,7 @@ end
 
 
 Let's launch threads:
+
 {% highlight ruby %}
     pad = ThreadsPad::Pad.new
     pad << CalcWork.new 1, 10000
@@ -92,7 +92,6 @@ The *ThreadsPad::Pad* class has following methods:
 * \#destroy_all - remove from db all records that belongs to a current job. If a job is not finished yet, it will be marked as *destroy_on_finish*. Once it get finished it will destroy itself.
 * \# start - starts jobs added to pad. It returns id number for this bundle of jobs.
 
-<br>
 
 ##Getting a Status
 
@@ -118,6 +117,7 @@ Ok, we have launched threads in background, so how we can control them and get f
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
     })
 {% endhighlight %}
+
 
 ##Behind The Curtain
 
