@@ -93,7 +93,7 @@ The *ThreadsPad::Pad* class has following methods:
 * \# start - starts jobs added to pad. It returns id number for this bundle of jobs.
 
 
-##Getting a Status
+## Getting a Status
 
 Ok, we have launched threads in background, so how we can control them and get feeback. For referencing to bundle of threads we need to memorize *@job_id*, then we have to instantiate *ThreadsPad::Pad*. Here is example of coffee script:
 
@@ -119,7 +119,7 @@ Ok, we have launched threads in background, so how we can control them and get f
 {% endhighlight %}
 
 
-##Behind The Curtain
+## Behind The Curtain
 
 Every *ThreadsPad::Job* encapsulates *ThreadsPad::JobReflection* ActiveRecord class. It represents by *threads_pad_jobs* table:
 
