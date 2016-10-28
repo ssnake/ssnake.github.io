@@ -42,10 +42,9 @@ desc 'create ssl'
   task set_webhook: :environment do
   	Telegram::Bot::Client.run(TELEGRAM_TOKEN) do |bot|
 		hook_url = ENV["BOT_HOST"] + "/webhooks/telegram"
-	              
-       puts "Setting webhook url: #{hook_url}"
-  		resp = bot.api.set_webhook url: hook_url, certificate: File.open('telegram.pem')
-  		puts resp.inspect
+		puts "Setting webhook url: #{hook_url}"
+		resp = bot.api.set_webhook url: hook_url, certificate: File.open('telegram.pem')
+		puts resp.inspect
   	end
   end
 {% endhighlight %}
