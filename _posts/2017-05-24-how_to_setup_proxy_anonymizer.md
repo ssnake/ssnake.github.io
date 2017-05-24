@@ -116,7 +116,7 @@ For example, I need to use direct connection for all internet except ```vk.com``
 
 Install [Proxy SwitchyOmega](https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif?hl=en-US)
 
-Then go to to its options and then select ```auto switch``` profile. Add following lines
+Go to to its options and then select `proxy` profile. Type in ip of your proxy server. Then go to  ```auto switch``` profile. Add following lines
 ![pic]({{ "/img/switchy_omega.png" | prepend: site.baseurl }})
 
 And now select `auto switch` profile
