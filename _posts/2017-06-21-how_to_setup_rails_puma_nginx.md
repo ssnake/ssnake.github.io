@@ -26,6 +26,7 @@ group :development do
   gem 'capistrano-lets-encrypt'
   gem 'capistrano-rbenv', '~> 2.0'
   gem 'capistrano3-puma'
+  gem 'capistrano-rails'
   gem 'sshkit-sudo'
 end
 {% endhighlight %}
@@ -48,6 +49,7 @@ Uncomment and add these lines in `Capfile`:
 require "capistrano/rbenv"
 require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
+require "capistrano/bundler"
 require 'capistrano/puma'
 require 'capistrano/puma/jungle'
 require 'capistrano/puma/workers'
