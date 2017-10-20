@@ -110,7 +110,9 @@ Normally if you use Rails 5 it uses `puma` as default server.  When you start an
 Since we're going to use `puma` on VPS things could be a bit different and we need different configuration file.
 Thus in order to not mess with default configuration file we will use `puma.conf`. This file will be used only on VPS.
 
-Log in on you VPS and create `~/projects/my_app/shared/puma.conf` and copy this:
+Run `bundle exec cap production puma:config` command it will create and uploade `puma.conf` to shared folder.
+
+Or you can log on you VPS and create `~/projects/my_app/shared/puma.conf` and copy this:
 
 
 {% highlight ruby %}
